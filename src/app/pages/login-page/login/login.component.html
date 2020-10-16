@@ -1,0 +1,42 @@
+<div class="page">
+    <div class="login-container">
+        <p>Logo Here</p>
+        <mat-card class="login-card">
+            <mat-card-content>
+                <form>
+                    <div class="login-email">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your Email</mat-label>
+                            <input matInput placeholder="example@binus.edu" [formControl]="emailFormControl" [(ngModel)]="email">
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="login-password">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" id="password" placeholder="Password" [(ngModel)]="password" [formControl]="passwordFormControl">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                                Password is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="login-button">
+                        <button mat-raised-button color="primary" (click)="login()">Login</button>
+                    </div>
+                    <br>
+                    <mat-error *ngIf="!checkEmailAndPassword()">
+                        Wrong Email or Password
+                    </mat-error>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
