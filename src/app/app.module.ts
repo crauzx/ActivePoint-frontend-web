@@ -1,21 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MatButtonModule } from '@angular/material/button'; 
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common'
+import { MatButtonModule } from '@angular/material/button'
+import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { MatCardModule } from '@angular/material/card'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { HttpClientModule } from '@angular/common/http'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login-page/login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { LoginComponent } from './pages/login-page/login/login.component'
+import { NavbarComponentComponent } from './components/navbar-component/navbar-component.component'
+import { HomeComponent } from './pages/home-page/home/home.component';
+import { QuestComponent } from './pages/quest-page/quest/quest.component';
+import { UserComponent } from './pages/user-page/user/user.component';
+import { RewardComponent } from './pages/reward-page/reward/reward.component';
+import { ViewUserComponent } from './components/view-user/view-user.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponentComponent,
+    HomeComponent,
+    QuestComponent,
+    UserComponent,
+    RewardComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,
+    HttpClientModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
