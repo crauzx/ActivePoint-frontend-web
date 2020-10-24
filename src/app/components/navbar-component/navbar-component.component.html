@@ -1,7 +1,13 @@
 <div class="navbar">
-    <div class="app-title">Active Point</div>
-    <div [ngClass]="active == 0 ? 'nav-title-active' : 'nav-title'" (click)="toHome()">Home</div>
-    <div [ngClass]="active == 1 ? 'nav-title-active' : 'nav-title'" (click)="toManageQuest()">Manage Quest</div>
-    <div [ngClass]="active == 2 ? 'nav-title-active' : 'nav-title'" (click)="toManageUser()">Manage User</div>
-    <div [ngClass]="active == 3 ? 'nav-title-active' : 'nav-title'" (click)="toManageReward()">Manage Reward</div>
+
+    <div class="nav-menu">
+        <div class="app-title">Active Point</div>
+        <div [ngClass]="active == 0 ? 'nav-title-active' : 'nav-title'" (click)="toHome()">Home</div>
+        <div [ngClass]="active == 1 ? 'nav-title-active' : 'nav-title'" (click)="toManageQuest()">Manage Task</div>
+        <div [ngClass]="active == 2 ? 'nav-title-active' : 'nav-title'" (click)="toManageUser()">Manage User</div>
+        <div [ngClass]="active == 3 ? 'nav-title-active' : 'nav-title'" (click)="toManageReward()">Manage Reward</div>
+    </div>
+
+    <button mat-raised-button class="logout-btn"*ngIf="active != -1"(click)="logout()">Logout</button>
+
 </div>

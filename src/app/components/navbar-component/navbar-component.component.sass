@@ -1,28 +1,36 @@
 .navbar
     display: flex
-    font-size: 15px
-    padding: 15px
+    justify-content: space-between
     background: #16215b
     color: #ffffff
     cursor: default
+    font-size: 15px
+    padding: 15px
 
-    .app-title
-        width: 10vw
+    .nav-menu
+        display: flex
+        align-items: center
+        
+        .app-title
+            width: 10vw
 
-    .nav-title
-        padding-left: 10px
-        width: 9vw
-        border-left: 2px solid #ffffff
-        &:hover
+        .nav-title
+            padding-left: 10px
+            width: 9vw
+            border-left: 2px solid #ffffff
+            &:hover
+                border-left: 2px solid #30d1ff
+                color: #30d1ff
+                cursor: pointer
+
+        .nav-title-active
+            padding-left: 10px
+            width: 9vw
             border-left: 2px solid #30d1ff
             color: #30d1ff
-            cursor: pointer
+            &:hover
+                cursor: pointer
 
-    .nav-title-active
-        padding-left: 10px
-        width: 9vw
-        border-left: 2px solid #30d1ff
-        color: #30d1ff
-        &:hover
-            cursor: pointer
-        
+    .logout-btn
+        background: #D60000
+        color: #ffffff

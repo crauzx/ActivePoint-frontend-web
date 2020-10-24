@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core'
 export class UserService {
 
   private URL_token = 'http://localhost:8000/api/auth/login'
-  private URL_user = 'http://localhost:8000/api/auth/check'
+  private URL_logout = 'http://localhost:8000/api/auth/logout'
+  private URL_user = 'http://localhost:8000/api/auth/check-admin'
 
   constructor(private http: HttpClient) {}
 
@@ -20,14 +21,22 @@ export class UserService {
     return this.http.post(this.URL_token, JSON.stringify(value), httpOptions)
   }
 
-  postUser(auth_token, value){
+  getAdmin(auth_token){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
         'Authorization': `Bearer ${auth_token}`
       })
     }
-    return this.http.post(this.URL_user, JSON.stringify(value), httpOptions)
+    return this.http.get(this.URL_user, httpOptions)
+  }
+
+  getLogout(auth_token){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${auth_token}`
+      })
+    }
+    return this.http.get(this.URL_user, httpOptions)
   }
 
 }

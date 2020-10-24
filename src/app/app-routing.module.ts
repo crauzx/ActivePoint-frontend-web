@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login-page/login/login.component';
 import { QuestComponent } from './pages/quest-page/quest/quest.component';
 import { RewardComponent } from './pages/reward-page/reward/reward.component';
 import { UserComponent } from './pages/user-page/user/user.component';
+import { AuthGuardService as AuthGuard } from './services/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -18,19 +19,23 @@ const routes: Routes = [
   },
   {
     path:'home',
-    component:HomeComponent
+    component:HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path:'quest',
-    component:QuestComponent
+    path:'task',
+    component:QuestComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'user',
-    component:UserComponent
+    component:UserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'reward',
-    component:RewardComponent
+    component:RewardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'**',

@@ -54,16 +54,22 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private getUserByFormValue(value){
-    this.authTokenSubcription = this.userService.postUserToken(value).subscribe(res => {
-      console.log(res)
-      this.setUserToken(res['token'])
-      this.getUser(this.userToken, value)
+    this.authTokenSubcription = this.userService.postUserToken(value).subscribe(auth_token => {
+      // console.log(auth_token)
+      this.setUserToken(auth_token['token'])
+      this.getUser(this.userToken)
     })
   }
 
-  private getUser(auth_token, value){
-    this.userSubcription = this.userService.postUser(auth_token, value).subscribe(res => {
-      console.log(res)
+  private getUser(auth_token){
+    this.userSubcription = this.userService.getAdmin(auth_token).subscribe(res => {
+      // console.log(res)
+      localStorage.setItem('token', auth_token)
+      if(res['message'] === 'admin')
+        this.toHome()
+      else{
+        this.invalid = true
+      }
     })
   }
 
