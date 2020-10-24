@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShareNavBarService } from 'src/app/services/navbar/share-nav-bar.service';
 
 @Component({
   selector: 'app-quest',
@@ -7,11 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestComponent implements OnInit {
 
-  activeNumber:number = 1
-
-  constructor() { }
+  constructor(private shareNavbar:ShareNavBarService) { }
 
   ngOnInit(): void {
+    this.shareNavbar.setNavActiveNumber(1)
   }
 
 }

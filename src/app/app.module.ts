@@ -7,6 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { MatCardModule } from '@angular/material/card'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSortModule } from '@angular/material/sort'
+import { MatTableModule } from '@angular/material/table'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 
@@ -14,10 +17,10 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { LoginComponent } from './pages/login-page/login/login.component'
 import { NavbarComponentComponent } from './components/navbar-component/navbar-component.component'
-import { HomeComponent } from './pages/home-page/home/home.component';
-import { QuestComponent } from './pages/quest-page/quest/quest.component';
-import { UserComponent } from './pages/user-page/user/user.component';
-import { RewardComponent } from './pages/reward-page/reward/reward.component';
+import { HomeComponent } from './pages/home-page/home/home.component'
+import { QuestComponent } from './pages/quest-page/quest/quest.component'
+import { UserComponent } from './pages/user-page/user/user.component'
+import { RewardComponent } from './pages/reward-page/reward/reward.component'
 import { ViewUserComponent } from './components/view-user/view-user.component'
 
 @NgModule({
@@ -44,6 +47,9 @@ import { ViewUserComponent } from './components/view-user/view-user.component'
     MatInputModule,
     MatIconModule,
     MatCardModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserService } from 'src/app/services/user.service';
+import { ShareNavBarService } from 'src/app/services/navbar/share-nav-bar.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-user',
@@ -8,15 +9,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user.component.sass']
 })
 export class UserComponent implements OnInit {
-
-  activeNumber:number = 2
   
   result$: Observable<any>
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private shareNavbar:ShareNavBarService) { }
 
   ngOnInit(): void {
     // this.result$ = this.userService.getUser();
+    this.shareNavbar.setNavActiveNumber(2)
   }
 
 }

@@ -1,65 +1,93 @@
-import {  Component, OnInit } from '@angular/core';
+import {  Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { Subscription } from 'rxjs';
+import { ShareNavBarService } from 'src/app/services/navbar/share-nav-bar.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private userService:UserService) { }
+  constructor(private router: Router, private userService:UserService, 
+    private shareNavbar:ShareNavBarService) { }
 
   // Attribute
   email : String
   password : String
   hide : Boolean
   invalid: Boolean
+  
+  private userToken : String
+  private authTokenSubcription : Subscription
+  private userSubcription : Subscription
 
   userForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
   })
-
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
-  ]);
+  ])
   passwordFormControl = new FormControl('', [
     Validators.required
-  ]);
+  ])
 
   // Function
   ngOnInit(): void {
     this.initializeAtt()
   }
 
-  initializeAtt(){
+  private initializeAtt(){
     this.hide = true
-    this.email = ""
-    this.password = ""
+    this.email = this.password = this.userToken = ""
     this.invalid = false
+    this.shareNavbar.setNavActiveNumber(-1)
   }
 
-  login(){
+  private toHome(){
     this.router.navigate(['/home'])
   }
 
-  checkEmailAndPassword(value) : Boolean{
-    this.userService.postUser(value).subscribe(res => {
-      // console.log(res)
-      // console.log(res['email'])
+  private getUserByFormValue(value){
+    this.authTokenSubcription = this.userService.postUserToken(value).subscribe(res => {
+      console.log(res)
+      this.setUserToken(res['token'])
+      this.getUser(this.userToken, value)
     })
-    return false
+  }
+
+  private getUser(auth_token, value){
+    this.userSubcription = this.userService.postUser(auth_token, value).subscribe(res => {
+      console.log(res)
+    })
+  }
+
+  private setUserToken(token){
+    if(token != undefined){
+      this.userToken = token
+    }
+  }
+  
+  private setUserFormValue(){
+    this.userForm.setValue({
+      email:this.email, 
+      password:this.password
+    })
   }
 
   onSubmit(form: NgForm){
-    this.userForm.setValue({email:this.email, password:this.password})
-    if(this.checkEmailAndPassword(form.value)){
-      this.login()
-    }
+    this.setUserFormValue()
+    this.getUserByFormValue(form.value)
+  }
+
+  ngOnDestroy(): void {
+    this.userSubcription.unsubscribe()
+    this.authTokenSubcription.unsubscribe()
   }
 
 }
