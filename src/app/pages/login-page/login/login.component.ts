@@ -86,9 +86,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     })
   }
 
-  onSubmit(form: NgForm){
+  onSubmit(){
     this.setUserFormValue()
-    this.getUserByFormValue(form.value)
+    this.getUserByFormValue(this.userForm.value)
   }
 
   ngOnDestroy(): void {

@@ -50,7 +50,8 @@ export class NavbarComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.getNavActiveNumberSubscription.unsubscribe();
+    if(this.getNavActiveNumberSubscription != undefined)
+      this.getNavActiveNumberSubscription.unsubscribe()
   }
 
 }

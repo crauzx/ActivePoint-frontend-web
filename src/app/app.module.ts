@@ -10,6 +10,9 @@ import { MatCardModule } from '@angular/material/card'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 
@@ -22,6 +25,8 @@ import { QuestComponent } from './pages/quest-page/quest/quest.component'
 import { UserComponent } from './pages/user-page/user/user.component'
 import { RewardComponent } from './pages/reward-page/reward/reward.component'
 import { ViewUserComponent } from './components/view-user/view-user.component'
+import { ViewTaskComponent } from './components/view-task/view-task.component'
+import { InsertTaskDialogComponent } from './components/insert-task-dialog/insert-task-dialog.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +37,9 @@ import { ViewUserComponent } from './components/view-user/view-user.component'
     QuestComponent,
     UserComponent,
     RewardComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    ViewTaskComponent,
+    InsertTaskDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +57,9 @@ import { ViewUserComponent } from './components/view-user/view-user.component'
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

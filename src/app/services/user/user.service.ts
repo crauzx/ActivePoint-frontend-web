@@ -15,7 +15,7 @@ export class UserService {
   postUserToken(value){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json'
+        'Content-Type': 'application/json'
       })
     }
     return this.http.post(this.URL_token, JSON.stringify(value), httpOptions)
@@ -36,7 +36,7 @@ export class UserService {
         'Authorization': `Bearer ${auth_token}`
       })
     }
-    return this.http.get(this.URL_user, httpOptions)
+    return this.http.get(this.URL_logout, httpOptions)
   }
 
 }
