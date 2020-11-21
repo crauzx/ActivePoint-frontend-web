@@ -1,8 +1,11 @@
 import { formatDate, Time } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
+import { TaskService } from 'src/app/services/task/task.service';
 
 @Component({
   selector: 'app-insert-task-dialog',
@@ -11,16 +14,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class InsertTaskDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<InsertTaskDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<InsertTaskDialogComponent>, private taskService:TaskService
+    , private _snackBar: MatSnackBar) { }
 
+  taskServiceSubscription:Subscription
   taskName:String
   taskDescription:String
   taskRewardPoint:Number
   taskStartDate:Date
-  taskStartTime:Time
+  taskStartTime:String
   taskDeadlineDate:Date
-  taskDeadlineTime:Time
+  taskDeadlineTime:String
   taskSlot:Number
 
   taskForm = new FormGroup({
@@ -37,10 +41,17 @@ export class InsertTaskDialogComponent implements OnInit {
 
   onSubmit(){
     this.setFormValue()
-    this.dialogRef.close(this.taskForm)
+    if(this.taskStartTime != undefined && this.taskDeadlineTime != undefined){
+      this.taskServiceSubscription = this.taskService.postTask(this.taskForm.value, localStorage.getItem('token')).subscribe( res => {
+        if(res["message"]){
+          this._snackBar.open(res["message"].toUpperCase(), "", { duration: 2000 })
+          this.dialogRef.close(this.taskForm)
+        }
+      })
+    }
   }
 
-  private getDate(date:Date, time:Time){
+  private getDate(date:Date, time:String){
     const format = 'yyyy-MM-dd'
     const locale = 'en-US'
     return `${formatDate(date, format, locale)} ${time}`
@@ -63,6 +74,11 @@ export class InsertTaskDialogComponent implements OnInit {
 
   selectDeadlineDate(event: MatDatepickerInputEvent<Date>){
     this.taskDeadlineDate = event.value
+  }
+
+  ngOnDestroy(){
+    if(this.taskServiceSubscription != undefined)
+      this.taskServiceSubscription.unsubscribe()
   }
 
 }

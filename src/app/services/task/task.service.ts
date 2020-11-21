@@ -6,18 +6,18 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
 
-  private URL_all_task = 'http://localhost:8000/api/task'
-  private URL_insert_task = 'http://localhost:8000/api/task'
+  private URL_task = 'http://localhost:8000/api/task'
 
   constructor(private http: HttpClient) { }
 
-  getAllTask(){
+  getAllTask(auth_token){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${auth_token}`
       })
     }
-    return this.http.get<any[]>(this.URL_all_task, httpOptions)
+    return this.http.get<any[]>(this.URL_task, httpOptions)
   }
 
   postTask(value, auth_token){
@@ -27,7 +27,28 @@ export class TaskService {
         'Authorization': `Bearer ${auth_token}`
       })
     }
-    return this.http.post(this.URL_insert_task, JSON.stringify(value), httpOptions)
+    return this.http.post(this.URL_task, JSON.stringify(value), httpOptions)
+  }
+
+  deleteTask(id, auth_token){
+    const URL_delete_task = `http://localhost:8000/api/task/${id}`
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${auth_token}`
+      })
+    }
+    return this.http.delete(URL_delete_task, httpOptions)
+  }
+
+  putTask(value, auth_token){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${auth_token}`
+      })
+    }
+    return this.http.put(this.URL_task, JSON.stringify(value), httpOptions)
   }
 
 }

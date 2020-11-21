@@ -1,30 +1,25 @@
 <div class="content">
     <mat-form-field>
         <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. nelson@binus.edu" #input>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Voucher Belanja Rp. 10000" #input>
     </mat-form-field>
     
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
     
-            <ng-container matColumnDef="task_name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Task Name</th>
-                <td mat-cell *matCellDef="let row"> {{row.taskName}} </td>
+            <ng-container matColumnDef="reward_type_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Reward Type Name</th>
+                <td mat-cell *matCellDef="let row"> {{row.rewardTypeName}} </td>
             </ng-container>
     
-            <ng-container matColumnDef="task_reward_point">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Task Reward Point</th>
-                <td mat-cell *matCellDef="let row"> {{row.rewardPoint}} </td>
+            <ng-container matColumnDef="reward_quantity">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Reward Quantity</th>
+                <td mat-cell *matCellDef="let row"> {{row.rewardQuantity}} </td>
             </ng-container>
     
-            <ng-container matColumnDef="task_start_date">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Task Start Date</th>
-                <td mat-cell *matCellDef="let row"> {{row.startDate | date:'medium'}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="task_deadline_date">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Task Deadline Date</th>
-                <td mat-cell *matCellDef="let row"> {{row.deadlineDate | date:'medium'}} </td>
+            <ng-container matColumnDef="reward_claim_point">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Reward Claim Point</th>
+                <td mat-cell *matCellDef="let row"> {{row.rewardClaimPoint}} </td>
             </ng-container>
 
             <ng-container matColumnDef="edit">

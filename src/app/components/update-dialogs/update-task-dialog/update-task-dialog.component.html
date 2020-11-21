@@ -1,0 +1,70 @@
+<form (ngSubmit)="onSubmit()">
+
+    <div>
+        <mat-form-field class="task-form-field">
+            <mat-label>Task Name</mat-label>
+            <input matInput type="text" [(ngModel)]="taskName" name="taskName" required>
+            <button mat-button *ngIf="taskName" matSuffix mat-icon-button aria-label="Clear" (click)="taskName=''">
+                <mat-icon>close</mat-icon>
+            </button>   
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="task-form-field">
+            <mat-label>Task Description</mat-label>
+            <textarea matInput [(ngModel)]="taskDescription" name="taskDescription" required></textarea>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="task-form-field">
+            <mat-label>Task Reward Point</mat-label>
+            <input matInput type="number" [(ngModel)]="taskRewardPoint" name="taskRewardPoint" min="0" max="1000" required>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field color="primary" appearance="fill" class="task-date-form-field">
+            <mat-label>Task Start Date</mat-label>
+            <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="taskStartDate" name="startDate"
+                (dateInput)="selectStartDate($event)" (dateChange)="selectStartDate($event)" required
+            >
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="task-time-form-field">
+            <mat-label>Task Start Time</mat-label>
+            <input matInput type="time" [(ngModel)]="taskStartTime" name="taskStartTime" required>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field color="primary" appearance="fill" class="task-date-form-field">
+            <mat-label>Task Deadline Date</mat-label>
+            <input matInput [matDatepicker]="deadlineDatePicker" [(ngModel)]="taskDeadlineDate" name="startDate"
+                (dateInput)="selectDeadlineDate($event)" (dateChange)="selectDeadlineDate($event)" required
+            >
+            <mat-datepicker-toggle matSuffix [for]="deadlineDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #deadlineDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="task-time-form-field">
+            <mat-label>Task Deadline Time</mat-label>
+            <input matInput type="time" [(ngModel)]="taskDeadlineTime" name="taskDeadlineTime" required>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="task-form-field">
+            <mat-label>Task Slot</mat-label>
+            <input matInput type="number" [(ngModel)]="taskSlot" name="taskSlot" min="0" max="20" required>
+        </mat-form-field>
+    </div>
+
+    <div class="btn">
+        <button mat-raised-button class="update-task">Update Task</button>
+        <button mat-raised-button mat-dialog-close>Cancel</button>
+    </div>
+</form>

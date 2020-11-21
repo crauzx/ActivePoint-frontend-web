@@ -1,23 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
-import { InsertTaskDialogComponent } from 'src/app/components/insert-task-dialog/insert-task-dialog.component';
+import { InsertTaskDialogComponent } from 'src/app/components/insert-dialogs/insert-task-dialog/insert-task-dialog.component';
+import { ViewTaskComponent } from 'src/app/components/views/view-task/view-task.component';
 import { ShareNavBarService } from 'src/app/services/navbar/share-nav-bar.service';
-import { TaskService } from 'src/app/services/task/task.service';
 
 @Component({
   selector: 'app-quest',
   templateUrl: './quest.component.html',
   styleUrls: ['./quest.component.sass']
 })
-export class QuestComponent implements OnInit, OnDestroy {
+export class QuestComponent implements OnInit {
 
+  @ViewChild(ViewTaskComponent) viewTaskComponent:ViewTaskComponent
   taskForm:FormGroup
-  
-  private taskServiceSubscription:Subscription
 
-  constructor(private shareNavbar:ShareNavBarService, private dialog:MatDialog, private taskService:TaskService) { }
+  constructor(private shareNavbar:ShareNavBarService, private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.shareNavbar.setNavActiveNumber(1)
@@ -27,22 +25,13 @@ export class QuestComponent implements OnInit, OnDestroy {
     const insertDialogRef = this.dialog.open(InsertTaskDialogComponent,{
       width: '500px'
     })
+
     insertDialogRef.afterClosed().subscribe( async res => {
       this.taskForm = res
-      // console.log(this.taskForm.value)
-
       if(this.taskForm != undefined) {
-        this.taskServiceSubscription = this.taskService.postTask(this.taskForm.value, localStorage.getItem('token')).subscribe( res => {
-          window.location.reload();
-        })
+        this.viewTaskComponent.getTasks()
       }
-
     })
-  }
-
-  ngOnDestroy(){
-    if(this.taskServiceSubscription != undefined)
-      this.taskServiceSubscription.unsubscribe()
   }
 
 }
