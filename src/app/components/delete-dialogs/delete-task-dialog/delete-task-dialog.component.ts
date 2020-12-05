@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { TaskService } from 'src/app/services/task/task.service';
   templateUrl: './delete-task-dialog.component.html',
   styleUrls: ['./delete-task-dialog.component.sass']
 })
-export class DeleteTaskDialogComponent implements OnInit {
+export class DeleteTaskDialogComponent implements OnInit, OnDestroy {
 
   constructor(public dialogRef: MatDialogRef<DeleteTaskDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any, private taskService:TaskService,
@@ -29,6 +29,11 @@ export class DeleteTaskDialogComponent implements OnInit {
       }
       console.log(res)
     })
+  }
+
+  ngOnDestroy(){
+    if(this.taskServiceSubscription != undefined)
+      this.taskServiceSubscription.unsubscribe()
   }
 
 }

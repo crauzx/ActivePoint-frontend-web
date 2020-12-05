@@ -12,6 +12,7 @@ import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatSelectModule } from '@angular/material/select'
 import { MatNativeDateModule } from '@angular/material/core'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -31,7 +32,11 @@ import { InsertTaskDialogComponent } from './components/insert-dialogs/insert-ta
 import { ViewRewardsComponent } from './components/views/view-rewards/view-rewards.component';
 import { UpdateTaskDialogComponent } from './components/update-dialogs/update-task-dialog/update-task-dialog.component';
 import { ViewTaskDetailDialogComponent } from './components/views/view-dialogs/view-task-detail-dialog/view-task-detail-dialog.component';
-import { DeleteTaskDialogComponent } from './components/delete-dialogs/delete-task-dialog/delete-task-dialog.component'
+import { DeleteTaskDialogComponent } from './components/delete-dialogs/delete-task-dialog/delete-task-dialog.component';
+import { InsertRewardDialogComponent } from './components/insert-dialogs/insert-reward-dialog/insert-reward-dialog.component';
+import { UpdateRewardDialogComponent } from './components/update-dialogs/update-reward-dialog/update-reward-dialog.component';
+import { DeleteRewardDialogComponent } from './components/delete-dialogs/delete-reward-dialog/delete-reward-dialog.component';
+import { ViewRewardDetailDialogComponent } from './components/views/view-dialogs/view-reward-detail-dialog/view-reward-detail-dialog.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +53,11 @@ import { DeleteTaskDialogComponent } from './components/delete-dialogs/delete-ta
     ViewRewardsComponent,
     UpdateTaskDialogComponent,
     ViewTaskDetailDialogComponent,
-    DeleteTaskDialogComponent
+    DeleteTaskDialogComponent,
+    InsertRewardDialogComponent,
+    UpdateRewardDialogComponent,
+    DeleteRewardDialogComponent,
+    ViewRewardDetailDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +79,7 @@ import { DeleteTaskDialogComponent } from './components/delete-dialogs/delete-ta
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

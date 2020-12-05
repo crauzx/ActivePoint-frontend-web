@@ -1,29 +1,29 @@
 export class Tasks {
 
-    private taskId:number
-    private taskName:string
+    private task_id:number
+    private task_name:string
     private description:string
-    private rewardPoint:number
-    private startDate:Date
-    private deadlineDate:Date
+    private reward_point:number
+    private start_date:Date
+    private deadline_date:Date
     private slot:number
 
     constructor(taskId:number, taskName:string, description:string, rewardPoint:number, startDate:Date, deadlineDate:Date, slot:number){
-        this.taskId = taskId
-        this.taskName = taskName
+        this.task_id = taskId
+        this.task_name = taskName
         this.description = description
-        this.rewardPoint = rewardPoint
-        this.startDate = startDate
-        this.deadlineDate = deadlineDate
+        this.reward_point = rewardPoint
+        this.start_date = startDate
+        this.deadline_date = deadlineDate
         this.slot = slot
     }
 
     public getTaskId():number{
-        return this.taskId
+        return this.task_id
     }
 
     public getTaskName():string{
-        return this.taskName
+        return this.task_name
     }
 
     public getDescription():string{
@@ -31,15 +31,15 @@ export class Tasks {
     }
 
     public getRewardPoint():number{
-        return this.rewardPoint
+        return this.reward_point
     }
 
     public getStartDate():Date{
-        return this.startDate
+        return this.start_date
     }
 
     public getDeadlineDate():Date{
-        return this.deadlineDate
+        return this.deadline_date
     }
 
     public getSlot():number{

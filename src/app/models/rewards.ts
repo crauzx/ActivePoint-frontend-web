@@ -1,43 +1,39 @@
+import { RewardTypes } from './reward_type_name'
+
 export class Rewards {
 
-    private rewardId:number
-    private rewardTypeId:number
-    private rewardTypeName:string
-    private rewardDescription:string
-    private rewardQuantity:number
-    private rewardClaimPoint:number
+    private id:number
+    private reward_type:RewardTypes
+    private description:string
+    private quantity:number
+    private claim_point:number
 
-    constructor(rewardId:number, rewardTypeId:number, rewardTypeName:string, rewardDescription:string, rewardQuantity:number, rewardClaimPoint:number){
-        this.rewardId = rewardId
-        this.rewardTypeId = rewardTypeId
-        this.rewardTypeName = rewardTypeName
-        this.rewardDescription = rewardDescription
-        this.rewardQuantity = rewardQuantity
-        this.rewardClaimPoint = rewardClaimPoint
+    constructor(id:number, reward_type:RewardTypes, description:string, quantity:number, claim_point:number){
+        this.id = id
+        this.reward_type = reward_type
+        this.description = description
+        this.quantity = quantity
+        this.claim_point = claim_point
     }
 
-    public getRewardId():number{
-        return this.rewardId
+    public getId():number{
+        return this.id
     }
 
-    public getRewardTypeId():number{
-        return this.rewardTypeId
+    public getRewardTypeName():RewardTypes{
+        return this.reward_type
     }
 
-    public getRewardTypeName():string{
-        return this.rewardTypeName
+    public getDescription():string{
+        return this.description
     }
 
-    public getRewardDescription():string{
-        return this.rewardDescription
+    public getQuantity():number{
+        return this.quantity
     }
 
-    public getRewardQuantity():number{
-        return this.rewardQuantity
-    }
-
-    public getRewardClaimPoint():number{
-        return this.rewardClaimPoint
+    public getClaimPoint():number{
+        return this.claim_point
     }
 
 }
