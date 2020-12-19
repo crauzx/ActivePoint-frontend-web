@@ -23,7 +23,7 @@
             </ng-container>
 
             <ng-container matColumnDef="edit">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
+                <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let row; let idx=index" class="edit">
                     <button mat-raised-button class="view-detail-btn" (click)="openDetailDialog(idx)">Detail</button>
                     <button mat-raised-button class="update-btn" (click)="openUpdateDialog(idx)">Update</button>

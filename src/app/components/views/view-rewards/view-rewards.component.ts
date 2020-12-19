@@ -5,7 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Rewards } from 'src/app/models/rewards';
-import { RewardTypes } from 'src/app/models/reward_type_name';
+import { RewardTypes } from 'src/app/models/reward_types';
+import { ProgressBarService } from 'src/app/services/progress-bar/progress-bar.service';
 import { RewardService } from 'src/app/services/reward/reward.service';
 import { RewardTypeService } from 'src/app/services/reward_type/reward-type.service';
 import { DeleteRewardDialogComponent } from '../../delete-dialogs/delete-reward-dialog/delete-reward-dialog.component';
@@ -23,13 +24,14 @@ export class ViewRewardsComponent implements OnInit, OnDestroy {
   private getAllRewardSubcription : Subscription
   rewardTypes:RewardTypes[]
 
+  dataSource = new MatTableDataSource<Rewards>()
+  displayedColumns: string[] = ['reward_description', 'reward_quantity', 'reward_claim_point','edit']
+  
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
-  dataSource = new MatTableDataSource<Rewards>()
-  displayedColumns: string[] = ['reward_description', 'reward_quantity', 'reward_claim_point','edit']
-
-  constructor(private rewardService:RewardService, private dialog:MatDialog, private rewardTypeService:RewardTypeService) { }
+  constructor(private rewardService:RewardService, private dialog:MatDialog, private rewardTypeService:RewardTypeService
+    , private progressBar:ProgressBarService) { }
 
   ngOnInit(): void {
     this.getRewards()
@@ -47,6 +49,8 @@ export class ViewRewardsComponent implements OnInit, OnDestroy {
       res.forEach(item => {
         this.rewards.push(new Rewards(item["id"], new RewardTypes(item["reward_type"]["id"], item["reward_type"]["type_name"]), item["description"], item["quantity"], item["claim_point"]))
       })
+      this.setDataSource()
+      this.progressBar.setShow(false)
     })
   }
   

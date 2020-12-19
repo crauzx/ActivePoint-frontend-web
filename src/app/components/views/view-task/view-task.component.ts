@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Tasks } from 'src/app/models/tasks';
+import { ProgressBarService } from 'src/app/services/progress-bar/progress-bar.service';
 import { TaskService } from 'src/app/services/task/task.service';
 import { DeleteTaskDialogComponent } from '../../delete-dialogs/delete-task-dialog/delete-task-dialog.component';
 import { UpdateTaskDialogComponent } from '../../update-dialogs/update-task-dialog/update-task-dialog.component';
@@ -15,7 +16,7 @@ import { ViewTaskDetailDialogComponent } from '../view-dialogs/view-task-detail-
   templateUrl: './view-task.component.html',
   styleUrls: ['./view-task.component.sass']
 })
-export class ViewTaskComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ViewTaskComponent implements OnInit, OnDestroy{
 
   tasks:Tasks[]
   private getAllTaskSubcription : Subscription
@@ -26,7 +27,7 @@ export class ViewTaskComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
-  constructor(private taskService:TaskService, private dialog:MatDialog) { }
+  constructor(private taskService:TaskService, private dialog:MatDialog, private progressBar:ProgressBarService) { }
 
   ngOnInit(): void {
     this.getTasks()
@@ -39,14 +40,16 @@ export class ViewTaskComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.getAllTaskSubcription = this.taskService.getAllTask(localStorage.getItem('token')).subscribe( res => {
+      this.progressBar.setShow(false)
       this.dataSource.data = res as Tasks[]
       res.forEach(item => {
         this.tasks.push(new Tasks(item["id"], item["task_name"], item["description"], item["reward_point"], item["start_date"], item["deadline_date"], item["slot"]))
       })
+      this.setDataSource()
     })
   }
 
-  ngAfterViewInit(): void {
+  setDataSource(): void {
     this.dataSource.sort = this.sort
     this.dataSource.paginator = this.paginator
   }

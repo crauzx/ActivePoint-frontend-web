@@ -14,7 +14,7 @@
         <mat-form-field class="form-field">
             <mat-label>Reward Type</mat-label>
             <mat-select formControlName="reward_type" required>
-                <mat-option *ngFor="let item of data" value="item">{{item.type_name}}</mat-option>
+                <mat-option *ngFor="let item of data" [value]="item.id">{{item.type_name}}</mat-option>
             </mat-select>
             <mat-error *ngIf="rewardForm.get('reward_type').hasError('required')">
                 Reward Type is <strong>required</strong>

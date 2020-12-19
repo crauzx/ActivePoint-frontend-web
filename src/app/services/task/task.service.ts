@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
 
-  private URL_task = 'http://localhost:8000/api/task'
+  private URL_task = 'http://localhost:8000/api/task/admin'
+  private URL_tast_1 = 'http://localhost:8000/api/task'
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +28,7 @@ export class TaskService {
         'Authorization': `Bearer ${auth_token}`
       })
     }
-    return this.http.post(this.URL_task, JSON.stringify(value), httpOptions)
+    return this.http.post(this.URL_tast_1, JSON.stringify(value), httpOptions)
   }
 
   deleteTask(id, auth_token){
@@ -48,7 +49,7 @@ export class TaskService {
         'Authorization': `Bearer ${auth_token}`
       })
     }
-    return this.http.put(this.URL_task, JSON.stringify(value), httpOptions)
+    return this.http.put(this.URL_tast_1, JSON.stringify(value), httpOptions)
   }
 
 }

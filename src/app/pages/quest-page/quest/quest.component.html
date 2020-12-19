@@ -1,4 +1,7 @@
 <div class="insert-container">
-    <button mat-raised-button class="insert-btn" (click)="openInsertDialog()">Add New Task</button>
+    <button mat-mini-fab class="insert-btn" (click)="openInsertDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>
 <app-view-task></app-view-task>
+<mat-progress-bar class="progress-bar" mode="indeterminate" *ngIf="show"></mat-progress-bar>

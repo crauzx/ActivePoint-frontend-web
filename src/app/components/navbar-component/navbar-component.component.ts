@@ -20,7 +20,7 @@ export class NavbarComponentComponent implements OnInit, OnDestroy {
     this.getNavActiveNumberSubscription = this.shareNavbar.getNavActiveNumber()
       .subscribe( active => 
         this.active = active
-      );
+      )
   }
 
   toHome(): void{
@@ -31,8 +31,8 @@ export class NavbarComponentComponent implements OnInit, OnDestroy {
     this.router.navigate(['/task'])
   }
 
-  toManageUser(): void{
-    this.router.navigate(['/user'])
+  toManageShareTask(): void{
+    this.router.navigate(['/share-task'])
   }
 
   toManageReward(): void{

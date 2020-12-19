@@ -28,10 +28,20 @@ export class InsertRewardDialogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
+  searchRewardType(type_id){
+    for (let index = 0; index < this.data.length; index++) {
+      if (this.data[index]['id'] === type_id)
+        return index
+    }
+    return -1
+  }
+
   onSubmit(){
     let type_id = this.rewardForm.get('reward_type').value
+    let type_idx = this.searchRewardType(type_id)
     this.rewardForm.patchValue({
-      type_id : type_id['id']
+      type_id : type_id,
+      reward_type: this.data[type_idx]
     })
     this.rewardServiceSubscription = this.rewardService.postReward(this.rewardForm.value, localStorage.getItem('token')).subscribe( res => {
       if(res["message"]){

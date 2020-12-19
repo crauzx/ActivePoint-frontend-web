@@ -1,12 +1,18 @@
-<div>
-    Description : {{data.description}}
-</div>
-<div>
-    Type : {{data.reward_type.type_name}}    
-</div>
-<div>
-    Quantity : {{data.quantity}}
-</div>
-<div>
-    Claim Point: {{data.claim_point}} points
-</div>
+<table>
+    <tr>
+        <td class="header">Description</td>
+        <td class="detail">{{data.description}}</td>
+    </tr>
+    <tr>
+        <td class="header">Reward Type Name</td>
+        <td class="detail">{{data.reward_type.type_name}}</td>
+    </tr>
+    <tr>
+        <td class="header">Quantity</td>
+        <td class="detail">{{data.quantity}}</td>
+    </tr>
+    <tr>
+        <td class="header">Claim Point</td>
+        <td class="detail">{{data.claim_point}}</td>
+    </tr>
+</table>

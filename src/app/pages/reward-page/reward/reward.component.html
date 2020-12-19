@@ -1,4 +1,7 @@
 <div class="insert-container">
-    <button mat-raised-button class="insert-btn" (click)="openDialog()">Add New Reward</button>
+    <button mat-mini-fab class="insert-btn" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>
 <app-view-rewards></app-view-rewards>
+<mat-progress-bar class="progress-bar" mode="indeterminate" *ngIf="show"></mat-progress-bar>

@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login-page/login/login.component';
 import { QuestComponent } from './pages/quest-page/quest/quest.component';
 import { RewardComponent } from './pages/reward-page/reward/reward.component';
 import { UserComponent } from './pages/user-page/user/user.component';
+import { ShareTaskComponent } from './pages/share-task-page/share-task/share-task.component'
 import { AuthGuardService as AuthGuard } from './services/auth/auth-guard.service';
 
 const routes: Routes = [
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path:'task',
     component:QuestComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'share-task',
+    component:ShareTaskComponent,
     canActivate: [AuthGuard]
   },
   {

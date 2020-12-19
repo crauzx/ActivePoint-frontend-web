@@ -1,4 +1,4 @@
-import { RewardTypes } from './reward_type_name'
+import { RewardTypes } from './reward_types'
 
 export class Rewards {
 

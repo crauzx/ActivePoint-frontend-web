@@ -15,6 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatSelectModule } from '@angular/material/select'
 import { MatNativeDateModule } from '@angular/material/core'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 
@@ -36,7 +37,9 @@ import { DeleteTaskDialogComponent } from './components/delete-dialogs/delete-ta
 import { InsertRewardDialogComponent } from './components/insert-dialogs/insert-reward-dialog/insert-reward-dialog.component';
 import { UpdateRewardDialogComponent } from './components/update-dialogs/update-reward-dialog/update-reward-dialog.component';
 import { DeleteRewardDialogComponent } from './components/delete-dialogs/delete-reward-dialog/delete-reward-dialog.component';
-import { ViewRewardDetailDialogComponent } from './components/views/view-dialogs/view-reward-detail-dialog/view-reward-detail-dialog.component'
+import { ViewRewardDetailDialogComponent } from './components/views/view-dialogs/view-reward-detail-dialog/view-reward-detail-dialog.component';
+import { ShareTaskComponent } from './pages/share-task-page/share-task/share-task.component';
+import { ViewShareTaskComponent } from './components/views/view-share-task/view-share-task.component'
 
 @NgModule({
   declarations: [
@@ -57,7 +60,9 @@ import { ViewRewardDetailDialogComponent } from './components/views/view-dialogs
     InsertRewardDialogComponent,
     UpdateRewardDialogComponent,
     DeleteRewardDialogComponent,
-    ViewRewardDetailDialogComponent
+    ViewRewardDetailDialogComponent,
+    ShareTaskComponent,
+    ViewShareTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +85,7 @@ import { ViewRewardDetailDialogComponent } from './components/views/view-dialogs
     MatNativeDateModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

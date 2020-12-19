@@ -1,18 +1,26 @@
-<div>
-    Task : {{data.taskName}}
-</div>
-<div>
-    Description : {{data.description}}    
-</div>
-<div>
-    Reward Point : {{data.rewardPoint}} points    
-</div>
-<div>
-    Start Date : {{data.startDate | date:'medium'}}    
-</div>
-<div>
-    Deadline Date : {{data.deadlineDate | date:'medium'}}    
-</div>
-<div>
-    Slot : {{data.slot}}    
-</div>
+<table>
+    <tr>
+        <td class="header">Task</td>
+        <td class="detail">{{data.task_name}}</td>
+    </tr>
+    <tr>
+        <td class="header">Description</td>
+        <td class="detail">{{data.description}}</td>
+    </tr>
+    <tr>
+        <td class="header">Reward Point</td>
+        <td class="detail">{{data.reward_point}}</td>
+    </tr>
+    <tr>
+        <td class="header">Start Date</td>
+        <td class="detail">{{data.start_date | date:'medium'}}</td>
+    </tr>
+    <tr>
+        <td class="header">Deadline Date</td>
+        <td class="detail">{{data.deadline_date | date:'medium'}}</td>
+    </tr>
+    <tr>
+        <td class="header">Slot</td>
+        <td class="detail">{{data.slot}}</td>
+    </tr>
+</table>

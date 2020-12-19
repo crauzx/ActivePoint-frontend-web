@@ -1,0 +1,64 @@
+<div class="content">
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mengawas Ujian" #input>
+    </mat-form-field>
+    
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+    
+            <ng-container matColumnDef="task_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Task Name</th>
+                <td mat-cell *matCellDef="let row">{{row.taken_task.task.task_name}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="share_task_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Share Date</th>
+                <td mat-cell *matCellDef="let row">{{row.share_date | date:'medium'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="publisher">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Publisher</th>
+                <td mat-cell *matCellDef="let row">{{row.publisher.name}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="taken_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Taken Date</th>
+                <td mat-cell *matCellDef="let row">{{row.taken_task.take_date | date:'medium'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="taker">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Taker</th>
+                <td mat-cell *matCellDef="let row">{{row.taker.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="task_status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let row">{{row.taken_task.status}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row; let idx=index" class="edit">
+                    <button mat-mini-fab class="approve-btn" (click)="onApproveClick(idx)">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                    <button mat-mini-fab class="decline-btn" (click)="onDeclineClick(idx)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data found</td>
+            </tr>
+    
+        </table>
+    
+        <mat-paginator [pageSizeOptions]="[10, 50, 100]"></mat-paginator>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import {  Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ShareNavBarService } from 'src/app/services/navbar/share-nav-bar.service';
@@ -13,29 +14,22 @@ import { UserService } from 'src/app/services/user/user.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private userService:UserService, 
-    private shareNavbar:ShareNavBarService) { }
+    private shareNavbar:ShareNavBarService, private _snackBar: MatSnackBar) { }
 
   // Attribute
   email : String
   password : String
   hide : Boolean
-  invalid: Boolean
+  show : Boolean
   
   private userToken : String
   private authTokenSubcription : Subscription
   private userSubcription : Subscription
 
   userForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required)
   })
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ])
-  passwordFormControl = new FormControl('', [
-    Validators.required
-  ])
 
   // Function
   ngOnInit(): void {
@@ -45,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private initializeAtt(){
     this.hide = true
     this.email = this.password = this.userToken = ""
-    this.invalid = false
+    this.show = false
     this.shareNavbar.setNavActiveNumber(-1)
   }
 
@@ -55,7 +49,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private getUserByFormValue(value){
     this.authTokenSubcription = this.userService.postUserToken(value).subscribe(auth_token => {
-      // console.log(auth_token)
       this.setUserToken(auth_token['token'])
       this.getUser(this.userToken)
     })
@@ -63,13 +56,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private getUser(auth_token){
     this.userSubcription = this.userService.getAdmin(auth_token).subscribe(res => {
-      // console.log(res)
       localStorage.setItem('token', auth_token)
-      if(res['message'] === 'admin')
+      if(res['message'] === 'admin'){
+        this.show = false
         this.toHome()
-      else{
-        this.invalid = true
       }
+    }, _ => {
+      this._snackBar.open("WRONG EMAIL OR PASSWORD", "", { duration: 3000 })
+      this.show = false
     })
   }
 
@@ -78,16 +72,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.userToken = token
     }
   }
-  
-  private setUserFormValue(){
-    this.userForm.setValue({
-      email:this.email, 
-      password:this.password
-    })
-  }
 
   onSubmit(){
-    this.setUserFormValue()
+    this.show = true
     this.getUserByFormValue(this.userForm.value)
   }
 
