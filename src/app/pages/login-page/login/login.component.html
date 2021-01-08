@@ -1,8 +1,7 @@
 <div class="login-wrapper">
-    <div class="logo">Logo Here</div>
     <mat-card class="login-card">
         <mat-card-content class="card-content">
-                <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="userForm">
                     <div class="login-email">
                         <mat-form-field appearance="outline">
                             <mat-label>Enter your Email</mat-label>
@@ -28,10 +27,10 @@
                         </mat-form-field>
                     </div>
                     <div class="login-button">
-                        <button mat-raised-button>Login</button>
+                        <button mat-raised-button (click)="onSubmit()">Login</button>
                     </div>
                 </form>
         </mat-card-content>
     </mat-card>
 </div>
-<mat-progress-bar class="progress-bar" mode="indeterminate" *ngIf="show"></mat-progress-bar>
+<mat-progress-bar class="progress-bar" mode="indeterminate" *ngIf="show == true"></mat-progress-bar>
